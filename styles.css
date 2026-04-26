@@ -101,7 +101,7 @@ body {
   min-height: 130px;
 }
 
-#about.window {
+#about.window:not(.hidden) {
   max-height: 66.67vh;
   display: flex;
   flex-direction: column;
