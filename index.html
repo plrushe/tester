@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XP Desktop Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="desktop" aria-label="Windows XP style desktop">
+      <ul class="icons" aria-label="Desktop icons">
+        <li>
+          <button class="desktop-icon" data-window="about" aria-label="Open About Me">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4c1.png" alt="" />
+            <span>About Me</span>
+          </button>
+        </li>
+        <li>
+          <button class="desktop-icon" data-window="projects" aria-label="Open Projects">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4c2.png" alt="" />
+            <span>Projects</span>
+          </button>
+        </li>
+        <li>
+          <button class="desktop-icon" data-window="contact" aria-label="Open Contact">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4e7.png" alt="" />
+            <span>Contact</span>
+          </button>
+        </li>
+      </ul>
+
+      <section class="window hidden" id="about" role="dialog" aria-labelledby="about-title">
+        <header class="title-bar">
+          <h2 id="about-title">About Me</h2>
+          <button class="close" data-close="about" aria-label="Close">✕</button>
+        </header>
+        <div class="window-content">
+          <p>Use this area for your biography, skills, and resume highlights.</p>
+        </div>
+      </section>
+
+      <section class="window hidden" id="projects" role="dialog" aria-labelledby="projects-title">
+        <header class="title-bar">
+          <h2 id="projects-title">Projects</h2>
+          <button class="close" data-close="projects" aria-label="Close">✕</button>
+        </header>
+        <div class="window-content">
+          <p>Showcase your projects with links, screenshots, and descriptions.</p>
+        </div>
+      </section>
+
+      <section class="window hidden" id="contact" role="dialog" aria-labelledby="contact-title">
+        <header class="title-bar">
+          <h2 id="contact-title">Contact</h2>
+          <button class="close" data-close="contact" aria-label="Close">✕</button>
+        </header>
+        <div class="window-content">
+          <p>Put your email, social links, and contact form here.</p>
+        </div>
+      </section>
+
+      <footer class="taskbar" aria-label="Taskbar">
+        <button class="start">start</button>
+        <ul class="taskbar-items" id="taskbar-items"></ul>
+        <time id="clock" aria-label="Clock"></time>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
