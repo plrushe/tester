@@ -1,7 +1,9 @@
 const iconButtons = document.querySelectorAll('.desktop-icon');
 const closeButtons = document.querySelectorAll('.close');
+const windows = document.querySelectorAll('.window');
 const taskbarItems = document.getElementById('taskbar-items');
 const clock = document.getElementById('clock');
+let zCounter = 10;
 
 const openWindow = (windowId) => {
   const win = document.getElementById(windowId);
@@ -43,10 +45,8 @@ const ensureTaskbarButton = (windowId) => {
 };
 
 const bringToFront = (active) => {
-  document.querySelectorAll('.window').forEach((win, i) => {
-    win.style.zIndex = String(i + 1);
-  });
-  active.style.zIndex = '999';
+  zCounter += 1;
+  active.style.zIndex = String(zCounter);
 };
 
 const refreshClock = () => {
@@ -68,8 +68,54 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closeWindow(button.dataset.close));
 });
 
-document.querySelectorAll('.window').forEach((win) => {
+windows.forEach((win) => {
   win.addEventListener('mousedown', () => bringToFront(win));
+});
+
+windows.forEach((win) => {
+  const titleBar = win.querySelector('.title-bar');
+  if (!titleBar) return;
+
+  titleBar.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0 || event.target.closest('.close')) return;
+
+    bringToFront(win);
+    const bounds = win.getBoundingClientRect();
+    const desktopBounds = document.querySelector('.desktop').getBoundingClientRect();
+
+    const offsetX = event.clientX - bounds.left;
+    const offsetY = event.clientY - bounds.top;
+
+    win.style.left = `${bounds.left - desktopBounds.left}px`;
+    win.style.top = `${bounds.top - desktopBounds.top}px`;
+    titleBar.setPointerCapture(event.pointerId);
+
+    const onMove = (moveEvent) => {
+      const maxLeft = desktopBounds.width - bounds.width;
+      const maxTop = desktopBounds.height - bounds.height - 42;
+      const nextLeft = Math.min(
+        Math.max(moveEvent.clientX - desktopBounds.left - offsetX, 0),
+        maxLeft
+      );
+      const nextTop = Math.min(
+        Math.max(moveEvent.clientY - desktopBounds.top - offsetY, 0),
+        maxTop
+      );
+
+      win.style.left = `${nextLeft}px`;
+      win.style.top = `${nextTop}px`;
+    };
+
+    const onUp = () => {
+      titleBar.removeEventListener('pointermove', onMove);
+      titleBar.removeEventListener('pointerup', onUp);
+      titleBar.removeEventListener('pointercancel', onUp);
+    };
+
+    titleBar.addEventListener('pointermove', onMove);
+    titleBar.addEventListener('pointerup', onUp);
+    titleBar.addEventListener('pointercancel', onUp);
+  });
 });
 
 refreshClock();

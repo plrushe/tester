@@ -12,13 +12,14 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Tahoma, "MS Sans Serif", sans-serif;
+  user-select: none;
 }
 
 .desktop {
   position: relative;
   height: 100vh;
   overflow: hidden;
-  background: url("https://upload.wikimedia.org/wikipedia/en/0/0d/Bliss_%28Windows_XP%29.png")
+  background: url("https://upload.wikimedia.org/wikipedia/commons/4/44/Bliss_%28Windows_XP%29.png")
     center / cover no-repeat;
 }
 
@@ -77,6 +78,7 @@ body {
   padding: 0.4rem;
   color: #fff;
   background: linear-gradient(90deg, #0057c3, #3f9cff);
+  cursor: move;
 }
 
 .title-bar h2 {
