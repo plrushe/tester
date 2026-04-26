@@ -1,0 +1,152 @@
+:root {
+  --xp-blue: #245edb;
+  --xp-dark-blue: #11379e;
+  --xp-light-blue: #4f89ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Tahoma, "MS Sans Serif", sans-serif;
+  user-select: none;
+}
+
+.desktop {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/4/44/Bliss_%28Windows_XP%29.png")
+    center / cover no-repeat;
+}
+
+.icons {
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  width: min-content;
+}
+
+.desktop-icon {
+  display: grid;
+  gap: 0.25rem;
+  justify-items: center;
+  width: 86px;
+  color: #fff;
+  border: 1px solid transparent;
+  background: transparent;
+  text-shadow: 0 1px 2px #000;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.desktop-icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.desktop-icon:focus,
+.desktop-icon:hover {
+  background: rgb(36 94 219 / 45%);
+  border-color: rgb(180 210 255 / 80%);
+}
+
+.window {
+  position: absolute;
+  top: 12%;
+  left: 16%;
+  width: min(480px, 85vw);
+  border: 1px solid #0831d9;
+  border-radius: 7px 7px 0 0;
+  background: #ece9d8;
+  box-shadow: 0 16px 35px rgb(0 0 0 / 45%);
+}
+
+.hidden {
+  display: none;
+}
+
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem;
+  color: #fff;
+  background: linear-gradient(90deg, #0057c3, #3f9cff);
+  cursor: move;
+}
+
+.title-bar h2 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.close {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  color: #fff;
+  width: 24px;
+  height: 22px;
+  background: #e24537;
+  cursor: pointer;
+}
+
+.window-content {
+  padding: 1rem;
+  min-height: 130px;
+}
+
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 42px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(to bottom, var(--xp-light-blue), var(--xp-blue));
+  border-top: 1px solid #76a9ff;
+  padding: 0 0.4rem;
+}
+
+.start {
+  height: 34px;
+  min-width: 92px;
+  border: 1px solid #2a7f06;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1.3rem;
+  font-style: italic;
+  background: linear-gradient(to bottom, #3fb918, #2a8b0a);
+}
+
+.taskbar-items {
+  display: flex;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.taskbar-items button {
+  border: 1px solid #8bb3ff;
+  border-radius: 2px;
+  color: #fff;
+  background: rgb(26 87 193 / 85%);
+  padding: 0.3rem 0.55rem;
+}
+
+#clock {
+  border-left: 1px solid #77a0ff;
+  color: #fff;
+  min-width: 86px;
+  text-align: center;
+  padding-left: 0.5rem;
+}
