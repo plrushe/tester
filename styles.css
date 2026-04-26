@@ -19,7 +19,7 @@ body {
   position: relative;
   height: 100vh;
   overflow: hidden;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/4/44/Bliss_%28Windows_XP%29.png")
+  background: url("./background.jpeg")
     center / cover no-repeat;
 }
 
