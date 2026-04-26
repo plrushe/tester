@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XP Portfolio Desktop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="desktop" aria-label="Windows XP style desktop">
+      <section class="desktop-icons" aria-label="Desktop icons">
+        <button class="desktop-icon" data-window="about" aria-label="Open About window">
+          <span class="icon-art">🗂️</span>
+          <span class="icon-label">About Me</span>
+        </button>
+        <button class="desktop-icon" data-window="projects" aria-label="Open Projects window">
+          <span class="icon-art">📁</span>
+          <span class="icon-label">Projects</span>
+        </button>
+        <button class="desktop-icon" data-window="contact" aria-label="Open Contact window">
+          <span class="icon-art">📧</span>
+          <span class="icon-label">Contact</span>
+        </button>
+      </section>
+
+      <section class="window-layer" aria-live="polite">
+        <article class="xp-window" id="about" hidden>
+          <header class="title-bar">
+            <h2>About Me</h2>
+            <button class="close" data-close="about" aria-label="Close About window">✕</button>
+          </header>
+          <div class="window-body">
+            <p>This section can introduce who you are and what this desktop experience is about.</p>
+          </div>
+        </article>
+
+        <article class="xp-window" id="projects" hidden>
+          <header class="title-bar">
+            <h2>Projects</h2>
+            <button class="close" data-close="projects" aria-label="Close Projects window">✕</button>
+          </header>
+          <div class="window-body">
+            <ul>
+              <li>Project 1 — Add screenshots and details.</li>
+              <li>Project 2 — Link to GitHub or demos.</li>
+              <li>Project 3 — Describe the stack used.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="xp-window" id="contact" hidden>
+          <header class="title-bar">
+            <h2>Contact</h2>
+            <button class="close" data-close="contact" aria-label="Close Contact window">✕</button>
+          </header>
+          <div class="window-body">
+            <p>Email: yourname@example.com</p>
+            <p>LinkedIn: linkedin.com/in/yourname</p>
+          </div>
+        </article>
+      </section>
+
+      <footer class="taskbar" aria-label="Taskbar">
+        <button class="start-btn" type="button">start</button>
+        <div class="task-items" id="taskItems"></div>
+        <time class="clock" id="clock" aria-label="Clock"></time>
+      </footer>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
