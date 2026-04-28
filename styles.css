@@ -146,32 +146,17 @@ body {
   cursor: pointer;
 }
 
-.captcha-panel {
-  margin-top: 1rem;
-  padding: 0.9rem;
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.contact-status {
+  margin: 0.35rem 0 0;
+  padding: 0.5rem 0.6rem;
   border: 1px solid #9bb8df;
   background: #f3f7ff;
-}
-
-.captcha-panel h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-}
-
-.captcha-panel p {
-  margin: 0 0 0.8rem;
-}
-
-.captcha-check {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-bottom: 0.8rem;
-}
-
-.captcha-check input {
-  width: 16px;
-  height: 16px;
+  font-size: 0.88rem;
 }
 
 .sent-state {

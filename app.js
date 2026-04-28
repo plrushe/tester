@@ -4,9 +4,9 @@ const windows = document.querySelectorAll('.window');
 const taskbarItems = document.getElementById('taskbar-items');
 const clock = document.getElementById('clock');
 const contactForm = document.getElementById('contact-form');
-const captchaPanel = document.getElementById('captcha-panel');
-const captchaCheck = document.getElementById('captcha-check');
-const captchaConfirm = document.getElementById('captcha-confirm');
+const contactSubmit = document.getElementById('contact-submit');
+const contactStatus = document.getElementById('contact-status');
+const recaptchaTokenInput = document.getElementById('contact-recaptcha-token');
 const sentState = document.getElementById('sent-state');
 let zCounter = 10;
 
@@ -126,32 +126,69 @@ windows.forEach((win) => {
 refreshClock();
 setInterval(refreshClock, 1000);
 
-if (contactForm && captchaPanel && captchaCheck && captchaConfirm && sentState) {
-  const showCaptcha = () => {
-    captchaPanel.classList.remove('hidden');
-    captchaCheck.focus();
+if (contactForm && sentState && contactSubmit && contactStatus && recaptchaTokenInput) {
+  const recaptchaSiteKey = contactForm.dataset.recaptchaSiteKey?.trim();
+
+  const setStatus = (message = '') => {
+    contactStatus.textContent = message;
+    contactStatus.classList.toggle('hidden', !message);
+  };
+
+  const loadRecaptcha = (siteKey) => {
+    if (window.grecaptcha?.execute) return Promise.resolve(window.grecaptcha);
+
+    return new Promise((resolve, reject) => {
+      const existingScript = document.querySelector('script[data-recaptcha="v3"]');
+      if (existingScript) {
+        existingScript.addEventListener('load', () => resolve(window.grecaptcha));
+        existingScript.addEventListener('error', () => reject(new Error('Could not load reCAPTCHA.')));
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
+      script.async = true;
+      script.defer = true;
+      script.dataset.recaptcha = 'v3';
+      script.addEventListener('load', () => resolve(window.grecaptcha));
+      script.addEventListener('error', () => reject(new Error('Could not load reCAPTCHA.')));
+      document.head.append(script);
+    });
   };
 
   const markSent = () => {
     contactForm.classList.add('hidden');
-    captchaPanel.classList.add('hidden');
+    setStatus('');
     sentState.classList.remove('hidden');
   };
 
-  contactForm.addEventListener('submit', (event) => {
+  contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!contactForm.reportValidity()) return;
-    showCaptcha();
-  });
-
-  captchaConfirm.addEventListener('click', () => {
-    if (!captchaCheck.checked) {
-      captchaCheck.focus();
+    if (!recaptchaSiteKey || recaptchaSiteKey === 'YOUR_RECAPTCHA_V3_SITE_KEY') {
+      setStatus('Add your reCAPTCHA v3 site key to enable sending.');
       return;
     }
 
-    markSent();
-    contactForm.reset();
-    captchaCheck.checked = false;
+    contactSubmit.disabled = true;
+    setStatus('Verifying with reCAPTCHA...');
+
+    try {
+      const grecaptcha = await loadRecaptcha(recaptchaSiteKey);
+      await new Promise((resolve) => grecaptcha.ready(resolve));
+      const token = await grecaptcha.execute(recaptchaSiteKey, {
+        action: 'contact_submit'
+      });
+      recaptchaTokenInput.value = token;
+
+      setStatus('Sending message...');
+      await new Promise((resolve) => setTimeout(resolve, 350));
+      markSent();
+      contactForm.reset();
+    } catch (error) {
+      setStatus('Verification failed. Please try again.');
+    } finally {
+      contactSubmit.disabled = false;
+    }
   });
 }
