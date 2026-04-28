@@ -133,6 +133,10 @@ body {
   height: calc(100% - 33px);
 }
 
+.pet-window .title-bar {
+  cursor: default;
+}
+
 .pet-image {
   display: block;
   width: 100%;

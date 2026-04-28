@@ -82,6 +82,7 @@ windows.forEach((win) => {
 windows.forEach((win) => {
   const titleBar = win.querySelector('.title-bar');
   if (!titleBar) return;
+  if (win.id === 'pet-window') return;
 
   titleBar.addEventListener('pointerdown', (event) => {
     if (event.button !== 0 || event.target.closest('.close')) return;
