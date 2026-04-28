@@ -117,6 +117,38 @@ body {
   min-height: 310px;
 }
 
+.pet-window {
+  top: auto;
+  left: auto;
+  right: 1rem;
+  bottom: 54px;
+  width: min(280px, 85vw);
+}
+
+.pet-window-content {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pet-image {
+  display: block;
+  width: min(220px, 100%);
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.pet-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pet-actions .submit-btn {
+  flex: 1;
+  justify-self: auto;
+  margin-top: 0;
+}
+
 .contact-form {
   display: grid;
   gap: 0.45rem;

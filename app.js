@@ -125,6 +125,7 @@ windows.forEach((win) => {
 
 refreshClock();
 setInterval(refreshClock, 1000);
+openWindow('pet-window');
 
 if (contactForm && sentState && contactSubmit && contactStatus && recaptchaTokenInput) {
   const recaptchaSiteKey = contactForm.dataset.recaptchaSiteKey?.trim();
