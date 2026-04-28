@@ -8,6 +8,8 @@ const contactSubmit = document.getElementById('contact-submit');
 const contactStatus = document.getElementById('contact-status');
 const recaptchaTokenInput = document.getElementById('contact-recaptcha-token');
 const sentState = document.getElementById('sent-state');
+const petImage = document.getElementById('pet-image');
+const giveToyButton = document.getElementById('give-toy-btn');
 let zCounter = 10;
 
 const openWindow = (windowId) => {
@@ -80,6 +82,7 @@ windows.forEach((win) => {
 windows.forEach((win) => {
   const titleBar = win.querySelector('.title-bar');
   if (!titleBar) return;
+  if (win.id === 'pet-window') return;
 
   titleBar.addEventListener('pointerdown', (event) => {
     if (event.button !== 0 || event.target.closest('.close')) return;
@@ -125,6 +128,13 @@ windows.forEach((win) => {
 
 refreshClock();
 setInterval(refreshClock, 1000);
+openWindow('pet-window');
+
+if (giveToyButton && petImage) {
+  giveToyButton.addEventListener('click', () => {
+    petImage.src = './dog2.png';
+  });
+}
 
 if (contactForm && sentState && contactSubmit && contactStatus && recaptchaTokenInput) {
   const recaptchaSiteKey = contactForm.dataset.recaptchaSiteKey?.trim();
