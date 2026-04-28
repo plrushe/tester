@@ -124,8 +124,25 @@
           <h2 id="contact-title">Contact</h2>
           <button class="close" data-close="contact" aria-label="Close">✕</button>
         </header>
-        <div class="window-content">
-          <p>Put your email, social links, and contact form here.</p>
+        <div class="window-content contact-window-content">
+          <form id="contact-form" class="contact-form" data-recaptcha-site-key="YOUR_RECAPTCHA_V3_SITE_KEY">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" required />
+
+            <label for="contact-email">Email</label>
+            <input id="contact-email" name="email" type="email" required />
+
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+            <input id="contact-recaptcha-token" name="recaptchaToken" type="hidden" />
+
+            <button type="submit" class="submit-btn" id="contact-submit">Submit</button>
+            <p id="contact-status" class="contact-status hidden" aria-live="polite"></p>
+          </form>
+
+          <section class="sent-state hidden" id="sent-state" aria-live="polite">
+            <p><span aria-hidden="true">✅</span> Sent</p>
+          </section>
         </div>
       </section>
 

@@ -68,7 +68,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .title-bar {
@@ -111,6 +111,65 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+}
+
+.contact-window-content {
+  min-height: 310px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.contact-form label {
+  font-size: 0.9rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #7f9db9;
+  padding: 0.45rem 0.5rem;
+  font: inherit;
+  background: #fff;
+}
+
+.submit-btn {
+  justify-self: start;
+  margin-top: 0.25rem;
+  border: 1px solid #6f8bb6;
+  border-radius: 3px;
+  padding: 0.4rem 0.8rem;
+  font: inherit;
+  background: linear-gradient(to bottom, #fff, #dfe8f8);
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.contact-status {
+  margin: 0.35rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #9bb8df;
+  background: #f3f7ff;
+  font-size: 0.88rem;
+}
+
+.sent-state {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.sent-state p {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 700;
 }
 
 .about-intro {
