@@ -3,6 +3,7 @@ const closeButtons = document.querySelectorAll('.close');
 const windows = document.querySelectorAll('.window');
 const taskbarItems = document.getElementById('taskbar-items');
 const clock = document.getElementById('clock');
+const mobileQuery = window.matchMedia('(max-width: 768px)');
 let zCounter = 10;
 
 const openWindow = (windowId) => {
@@ -59,6 +60,9 @@ const refreshClock = () => {
 
 iconButtons.forEach((button) => {
   button.addEventListener('dblclick', () => openWindow(button.dataset.window));
+  button.addEventListener('click', () => {
+    if (mobileQuery.matches) openWindow(button.dataset.window);
+  });
   button.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') openWindow(button.dataset.window);
   });
@@ -75,6 +79,11 @@ windows.forEach((win) => {
 windows.forEach((win) => {
   const titleBar = win.querySelector('.title-bar');
   if (!titleBar) return;
+
+  if (mobileQuery.matches) {
+    titleBar.style.cursor = 'default';
+    return;
+  }
 
   titleBar.addEventListener('pointerdown', (event) => {
     if (event.button !== 0 || event.target.closest('.close')) return;
