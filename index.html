@@ -124,8 +124,33 @@
           <h2 id="contact-title">Contact</h2>
           <button class="close" data-close="contact" aria-label="Close">✕</button>
         </header>
-        <div class="window-content">
-          <p>Put your email, social links, and contact form here.</p>
+        <div class="window-content contact-window-content">
+          <form id="contact-form" class="contact-form">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" required />
+
+            <label for="contact-email">Email</label>
+            <input id="contact-email" name="email" type="email" required />
+
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="submit-btn">Submit</button>
+          </form>
+
+          <section class="captcha-panel hidden" id="captcha-panel" aria-live="polite">
+            <h3>Captcha Verification</h3>
+            <p>Please confirm you're human to send your message.</p>
+            <label class="captcha-check">
+              <input type="checkbox" id="captcha-check" />
+              <span>I'm not a robot</span>
+            </label>
+            <button type="button" id="captcha-confirm" class="submit-btn">Verify & Send</button>
+          </section>
+
+          <section class="sent-state hidden" id="sent-state" aria-live="polite">
+            <p><span aria-hidden="true">✅</span> Sent</p>
+          </section>
         </div>
       </section>
 

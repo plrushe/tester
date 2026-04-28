@@ -3,6 +3,11 @@ const closeButtons = document.querySelectorAll('.close');
 const windows = document.querySelectorAll('.window');
 const taskbarItems = document.getElementById('taskbar-items');
 const clock = document.getElementById('clock');
+const contactForm = document.getElementById('contact-form');
+const captchaPanel = document.getElementById('captcha-panel');
+const captchaCheck = document.getElementById('captcha-check');
+const captchaConfirm = document.getElementById('captcha-confirm');
+const sentState = document.getElementById('sent-state');
 let zCounter = 10;
 
 const openWindow = (windowId) => {
@@ -120,3 +125,33 @@ windows.forEach((win) => {
 
 refreshClock();
 setInterval(refreshClock, 1000);
+
+if (contactForm && captchaPanel && captchaCheck && captchaConfirm && sentState) {
+  const showCaptcha = () => {
+    captchaPanel.classList.remove('hidden');
+    captchaCheck.focus();
+  };
+
+  const markSent = () => {
+    contactForm.classList.add('hidden');
+    captchaPanel.classList.add('hidden');
+    sentState.classList.remove('hidden');
+  };
+
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    showCaptcha();
+  });
+
+  captchaConfirm.addEventListener('click', () => {
+    if (!captchaCheck.checked) {
+      captchaCheck.focus();
+      return;
+    }
+
+    markSent();
+    contactForm.reset();
+    captchaCheck.checked = false;
+  });
+}
