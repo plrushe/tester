@@ -3,6 +3,8 @@ const closeButtons = document.querySelectorAll('.close');
 const windows = document.querySelectorAll('.window');
 const taskbarItems = document.getElementById('taskbar-items');
 const clock = document.getElementById('clock');
+const taskbar = document.querySelector('.taskbar');
+const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 let zCounter = 10;
 
 const openWindow = (windowId) => {
@@ -59,6 +61,9 @@ const refreshClock = () => {
 
 iconButtons.forEach((button) => {
   button.addEventListener('dblclick', () => openWindow(button.dataset.window));
+  if (coarsePointer) {
+    button.addEventListener('click', () => openWindow(button.dataset.window));
+  }
   button.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') openWindow(button.dataset.window);
   });
@@ -77,6 +82,7 @@ windows.forEach((win) => {
   if (!titleBar) return;
 
   titleBar.addEventListener('pointerdown', (event) => {
+    if (window.innerWidth <= 768) return;
     if (event.button !== 0 || event.target.closest('.close')) return;
 
     bringToFront(win);
@@ -92,7 +98,7 @@ windows.forEach((win) => {
 
     const onMove = (moveEvent) => {
       const maxLeft = desktopBounds.width - bounds.width;
-      const maxTop = desktopBounds.height - bounds.height - 42;
+      const maxTop = desktopBounds.height - bounds.height - (taskbar?.offsetHeight ?? 42);
       const nextLeft = Math.min(
         Math.max(moveEvent.clientX - desktopBounds.left - offsetX, 0),
         maxLeft
